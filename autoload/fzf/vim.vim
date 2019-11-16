@@ -704,7 +704,11 @@ function! s:ag_handler(lines, has_column)
   catch
   endtry
 
-  call s:fill_quickfix(list)
+  if get(g:, 'fzf_list_type', 1) == 1
+    call s:fill_quickfix(list, 'cfirst')
+  else
+    call s:fill_loclist(list, 'lfirst')
+  endif
 endfunction
 
 " query, [[ag options], options]
